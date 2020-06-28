@@ -1,0 +1,29 @@
+class Solution {
+    public int findDuplicate(int[] nums) {
+        if(nums.length == 0 || nums == null) {
+            return 0;
+        }
+        int low = 1;
+        int high = nums.length-1;
+        while(low < high) {
+            int count = 0;
+            int mid = low + (high-low)/2;
+            for(int i=0; i<nums.length; i++) {
+                if(nums[i] <= mid) {
+                    count++;
+                }
+            }
+            if(count > mid) {
+                high = mid;
+            }
+            else {
+                low = mid+1;
+            }
+        }
+        return low;
+    }
+}
+
+// At first the search space is numbers between 1 to n. Each time I select a number mid (which is the one in the middle) 
+// and count all the numbers equal to or less than mid. 
+// Then if the count is more than mid, the search space will be [1 mid] otherwise [mid+1 n]. I do this until search space is only one number
