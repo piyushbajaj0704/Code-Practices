@@ -1,0 +1,8 @@
+    public boolean canAttendMeetings(Interval[] intervals) {
+        Arrays.sort(intervals, (i1, i2) -> i1.start - i2.start);
+        // i start from, compare if current interval overlap with previous one
+        for (int i = 1; i < intervals.length; i++) {
+            if (intervals[i].start < intervals[i - 1].end) return false; // notice it's `<` not `<=` 
+        }
+        return true;
+    }
